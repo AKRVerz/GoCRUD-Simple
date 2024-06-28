@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Go CRUD</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        padding: 2rem;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+      }
+      .done {
+        text-decoration: line-through;
+        color: gray;
+      }
+      .todo-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+        margin-bottom: 0.5rem;
+        background-color: white;
+      }
+      .todo-item .actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .todo-item img {
+        max-width: 100px;
+        max-height: 100px;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center mb-4">{{.PageTitle}}</h1>
+      <form action="" method="POST" class="mb-4">
+        <div class="form-group">
+          <input
+            type="text"
+            name="todo"
+            class="form-control"
+            placeholder="Enter a new to-do"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            name="imageURL"
+            class="form-control"
+            placeholder="Enter image URL (optional)"
+          />
+        </div>
+        <div class="form-group">
+          <input type="date" name="dueDate" class="form-control" />
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+      </form>
+      <ul class="list-unstyled">
+        {{range .Todos}}
+        <li class="todo-item {{if .Done}}done{{end}}">
+          {{if .ImageURL}}
+          <img src="{{.ImageURL}}" alt="Todo Image" />
+          {{end}}
+          <span>{{.Title}} ({{.DueDate}})</span>
+          <div class="actions">
+            {{if .Done}}
+            <a href="/delete/{{.ID}}" class="btn btn-danger btn-sm">Delete</a>
+            {{else}}
+            <a href="/done/{{.ID}}" class="btn btn-success btn-sm">Done</a>
+            {{end}}
+          </div>
+        </li>
+        {{end}}
+      </ul>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-eE4fGon9Tvcu8F/vVYcF5S+zmiFbACd9EvQyxu6JIMaLLmAJ/y0PprjpwH8gg7Sk"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgEpHQGV1AEBfC8SmyVv5j/lGRVq/0K8GmY0Q5IoFcBIa7xN9gC"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
+
