@@ -1,4 +1,4 @@
-module simpleCRUD
+module github.com/AKRVerz/GoCRUD-Simple
 
 go 1.22.4
 
